@@ -3,327 +3,248 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transmisión COG - Para Pafe</title>
+    <title>Transmisión COG Encriptada - ¡Feliz Cumpleaños Pafe!</title>
     <style>
-        /* === TEMA: PISTA DE HIELO Y NIEVE === */
+        /* Fondo de Pista de Hielo y Cielo de Invierno */
         body {
             margin: 0;
             padding: 0;
-            height: 100vh;
-            /* Fondo que simula el hielo profundo y frío */
-            background: radial-gradient(ellipse at bottom, #b9d8eb 0%, #5a85a3 40%, #1e3c54 100%);
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #0b1d3a 0%, #1a365d 40%, #5b8db8 70%, #a4d2e8 100%);
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            font-family: 'Segoe UI', Impact, Tahoma, Geneva, Verdana, sans-serif;
+            justify-content: center;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
             overflow: hidden;
-            color: #fff;
+            color: white;
         }
 
-        /* Efecto de reflejo en el suelo (Pista de hielo) */
-        .ice-floor {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 30vh;
-            background: linear-gradient(to top, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 100%);
-            backdrop-filter: blur(5px);
-            z-index: 1;
-            border-top: 2px solid rgba(255, 255, 255, 0.3);
-        }
-
-        /* Nieve cayendo mediante CSS */
-        .snow-container {
+        /* Efecto de nieve cayendo */
+        .snowflakes {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none;
-            z-index: 2;
+            z-index: 0;
         }
         .snowflake {
             position: absolute;
-            background: #fff;
+            width: 8px; height: 8px;
+            background: white;
             border-radius: 50%;
-            opacity: 0.8;
+            box-shadow: 0 0 10px rgba(255,255,255,0.8);
             animation: fall linear infinite;
         }
         @keyframes fall {
-            0% { transform: translateY(-10px) translateX(0); opacity: 1; }
-            100% { transform: translateY(100vh) translateX(20px); opacity: 0; }
+            0% { transform: translateY(-100px) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            100% { transform: translateY(100vh) translateX(50px); opacity: 0.5; }
         }
 
-        /* === INTERFAZ COG (GEARS OF WAR) === */
-        .main-container {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            width: 90%;
-            max-width: 800px;
-        }
-
-        .header-title {
-            text-transform: uppercase;
+        /* Título Principal */
+        h1 {
+            z-index: 1;
             font-size: 2.5rem;
+            text-transform: uppercase;
             letter-spacing: 3px;
-            color: #aed9f8;
-            text-shadow: 0 0 10px rgba(174, 217, 248, 0.8), 2px 2px 0px #000;
+            text-shadow: 0 0 10px #4fc3f7, 0 0 20px #0288d1;
             margin-bottom: 40px;
-            border-bottom: 2px solid #aed9f8;
-            padding-bottom: 10px;
+            text-align: center;
+            background: -webkit-linear-gradient(#fff, #90caf9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        /* Personajes */
-        .characters-wrapper {
+        /* Contenedor de las tarjetas */
+        .cards-container {
             display: flex;
-            justify-content: center;
-            gap: 40px;
+            gap: 30px;
+            z-index: 1;
             margin-bottom: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
-        .character-card {
-            background: rgba(20, 20, 25, 0.8);
-            border: 2px solid #555;
-            border-radius: 10px;
-            width: 200px;
+        /* Tarjetas Metálicas Estilo Gears */
+        .card {
+            background: linear-gradient(145deg, #2a2d34, #1b1d22);
+            border: 2px solid #4a4e59;
+            border-radius: 15px;
             padding: 15px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.6), inset 0 0 15px rgba(200, 30, 30, 0.2);
-            transition: all 0.3s ease;
+            width: 200px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.6), inset 0 0 15px rgba(0,0,0,0.8);
             position: relative;
-            overflow: hidden;
+            transition: transform 0.3s ease;
         }
 
-        .character-card::before {
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Luces de los bordes de la armadura */
+        .card::before, .card::after {
             content: '';
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 5px;
-            background: #c0392b; /* Rojo sangre Gears */
+            width: 30px;
+            height: 4px;
+            border-radius: 2px;
+            top: -3px;
         }
+        .card.lizzie::before { left: 20px; background: #00e5ff; box-shadow: 0 0 10px #00e5ff; }
+        .card.lizzie::after { right: 20px; background: #00e5ff; box-shadow: 0 0 10px #00e5ff; }
+        
+        .card.benjamin::before { left: 20px; background: #00e5ff; box-shadow: 0 0 10px #00e5ff; }
+        .card.benjamin::after { right: 20px; background: #ff1744; box-shadow: 0 0 10px #ff1744; }
 
-        .character-card:hover {
-            transform: translateY(-10px);
-            border-color: #c0392b;
-            box-shadow: 0 15px 30px rgba(192, 57, 43, 0.4);
-        }
-
-        .char-img-placeholder {
+        /* Imágenes de los personajes */
+        .character-img {
             width: 100%;
-            height: 150px;
-            background: #2a2a35;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 1px solid #444;
-            overflow: hidden;
-        }
-
-        .char-img-placeholder img {
-            width: 100%;
-            height: 100%;
+            height: 180px;
+            background-color: #111;
+            border-radius: 8px;
+            border: 2px solid #555;
+            margin-bottom: 15px;
             object-fit: cover;
         }
 
-        .char-name {
+        .card h2 {
             font-size: 1.2rem;
-            font-weight: bold;
-            color: #ddd;
+            color: #e0e0e0;
+            margin: 0;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        /* Botón de Transmisión */
-        .btn-transmit {
-            background: linear-gradient(135deg, #1a1a1a, #333);
-            color: #aed9f8;
-            border: 2px solid #aed9f8;
-            padding: 15px 40px;
-            font-size: 1.3rem;
+        /* Botón de Acción */
+        .action-btn {
+            z-index: 1;
+            background: linear-gradient(to bottom, #d32f2f, #b71c1c);
+            border: 2px solid #ff5252;
+            color: white;
+            font-size: 1.2rem;
             font-weight: bold;
+            padding: 15px 40px;
+            border-radius: 5px;
+            cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 2px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 15px rgba(174, 217, 248, 0.3);
+            box-shadow: 0 5px 15px rgba(211, 47, 47, 0.5);
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        .btn-transmit:hover {
-            background: #aed9f8;
-            color: #000;
-            box-shadow: 0 0 25px rgba(174, 217, 248, 0.8);
+        .action-btn:hover {
+            background: linear-gradient(to bottom, #f44336, #d32f2f);
+            box-shadow: 0 8px 25px rgba(255, 82, 82, 0.7);
             transform: scale(1.05);
         }
 
-        /* === CARTA MODAL (TRANSMISIÓN ENCRIPTADA) === */
-        .letter-modal {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(8px);
-            z-index: 100;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.5s ease;
-        }
-
-        .letter-modal.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .letter-content {
-            background: rgba(15, 25, 35, 0.95);
-            border: 2px solid #c0392b;
-            width: 90%;
-            max-width: 600px;
-            padding: 40px;
+        /* Panel de Mensaje Oculto */
+        #message-panel {
+            display: none;
+            z-index: 2;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(10, 15, 20, 0.95);
+            border: 2px solid #00e5ff;
             border-radius: 10px;
-            box-shadow: 0 0 30px rgba(192, 57, 43, 0.5);
-            position: relative;
-            transform: translateY(50px);
-            transition: transform 0.5s ease;
+            padding: 40px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 0 30px rgba(0, 229, 255, 0.3);
+            text-align: center;
+        }
+
+        .terminal-text {
+            color: #00e5ff;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            text-shadow: 0 0 5px rgba(0, 229, 255, 0.5);
             text-align: left;
         }
 
-        .letter-modal.active .letter-content {
-            transform: translateY(0);
+        .typing-cursor {
+            display: inline-block;
+            width: 10px;
+            height: 20px;
+            background-color: #00e5ff;
+            animation: blink 1s step-end infinite;
         }
 
-        .cog-logo-bg {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 15rem;
-            color: rgba(255, 255, 255, 0.03);
-            pointer-events: none;
-        }
-
-        .letter-header {
-            color: #c0392b;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #444;
-            padding-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        .letter-body {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            color: #ccc;
-            margin-bottom: 30px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .btn-close {
-            background: #c0392b;
-            color: white;
-            border: none;
-            padding: 10px 25px;
-            font-size: 1rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background 0.3s;
-        }
-
-        .btn-close:hover {
-            background: #e74c3c;
-        }
+        @keyframes blink { 50% { opacity: 0; } }
     </style>
 </head>
 <body>
 
-    <!-- Suelo de hielo -->
-    <div class="ice-floor"></div>
-
-    <!-- Contenedor para la nieve animada -->
-    <div class="snow-container" id="snowContainer"></div>
-
-    <div class="main-container">
-        <h1 class="header-title">Transmisión COG Encriptada</h1>
-        
-        <div class="characters-wrapper">
-            <!-- Tarjeta Lizzie Carmine -->
-            <div class="character-card">
-                <div class="char-img-placeholder">
-                    <!-- Puedes reemplazar este enlace por una imagen real de Lizzie -->
-                    <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=400&auto=format&fit=crop" alt="Lizzie Carmine">
-                </div>
-                <div class="char-name">Lizzie Carmine</div>
-            </div>
-
-            <!-- Tarjeta Benjamin Carmine -->
-            <div class="character-card">
-                <div class="char-img-placeholder">
-                    <!-- Puedes reemplazar este enlace por una imagen real de Benjamin -->
-                    <img src="https://images.unsplash.com/photo-1614027164847-1b28cfe1df60?q=80&w=400&auto=format&fit=crop" alt="Benjamin Carmine">
-                </div>
-                <div class="char-name">Benjamin Carmine</div>
-            </div>
-        </div>
-
-        <button class="btn-transmit" onclick="openLetter()">Descifrar Mensaje para Pafe</button>
+    <div class="snowflakes">
+        <script>
+            for(let i=0; i<30; i++){
+                let snow = document.createElement('div');
+                snow.className = 'snowflake';
+                snow.style.left = Math.random() * 100 + 'vw';
+                snow.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                snow.style.animationDelay = (Math.random() * 2) + 's';
+                document.querySelector('.snowflakes').appendChild(snow);
+            }
+        </script>
     </div>
 
-    <!-- Carta Modal (El Mensaje) -->
-    <div class="letter-modal" id="letterModal">
-        <div class="letter-content">
-            <div class="cog-logo-bg">⚙️</div>
-            <div class="letter-header">
-                DESTINATARIO: PAFE <br>
-                ESTADO: ALTO SECRETO
-            </div>
-            <div class="letter-body">
-                <p>Saludos, Pafe.</p>
-                <p>Incluso en medio de este frío implacable y con el frente de batalla siempre activo, nos hemos tomado un momento para enviarte esta transmisión directa.</p>
-                <p>Mantente fuerte, sigue adelante y recuerda que la familia Carmine te envía sus mejores deseos desde esta fría pista de hielo. Tienes todo lo necesario para superar cualquier obstáculo que se presente.</p>
-                <p><em>— Lizzie y Ben. Corto y cierro.</em></p>
-            </div>
-            <button class="btn-close" onclick="closeLetter()">Cerrar Transmisión</button>
+    <h1>Transmisión COG Encriptada</h1>
+
+    <div class="cards-container" id="main-ui">
+        <div class="card lizzie">
+            <img src="https://via.placeholder.com/200x180/1a1a1a/00e5ff?text=LIZZIE+MINI" alt="Lizzie Carmine" class="character-img">
+            <h2>Lizzie Carmine</h2>
         </div>
+
+        <div class="card benjamin">
+            <img src="https://via.placeholder.com/200x180/1a1a1a/00e5ff?text=BEN+MINI" alt="Benjamin Carmine" class="character-img">
+            <h2>Benjamin Carmine</h2>
+        </div>
+    </div>
+
+    <button class="action-btn" id="decrypt-btn" onclick="startDecryption()">Descifrar Mensaje para Pafe</button>
+
+    <div id="message-panel">
+        <div class="terminal-text" id="terminal"></div>
     </div>
 
     <script>
-        // Funciones para abrir y cerrar la carta
-        function openLetter() {
-            document.getElementById('letterModal').classList.add('active');
+        // La carta de cumpleaños que se escribirá automáticamente
+        const secretMessage = "Iniciando desencriptación...\nConexión segura establecida.\n\n¡FELIZ CUMPLEAÑOS, PAFE! 🎉\n\nLizzie y Benjamin han asegurado el perímetro en la pista de hielo exclusivamente para celebrar tu día.\n\nEres una verdadera leyenda en nuestra escuadra. Que este nuevo nivel en tu vida esté lleno de victorias, recompensas épicas y cero Locust a la vista.\n\n¡Disfruta tu día al máximo, soldado! Sigue brillando.\n\nFin de la transmisión.";
+        
+        let i = 0;
+        
+        function startDecryption() {
+            document.getElementById('main-ui').style.filter = "blur(5px)";
+            document.getElementById('main-ui').style.opacity = "0.5";
+            document.getElementById('decrypt-btn').style.display = "none";
+            
+            const panel = document.getElementById('message-panel');
+            panel.style.display = "block";
+            
+            typeWriter();
         }
 
-        function closeLetter() {
-            document.getElementById('letterModal').classList.remove('active');
-        }
-
-        // Generador de copos de nieve aleatorios
-        const snowContainer = document.getElementById('snowContainer');
-        const numberOfSnowflakes = 50;
-
-        for (let i = 0; i < numberOfSnowflakes; i++) {
-            let snowflake = document.createElement('div');
-            snowflake.classList.add('snowflake');
-            
-            // Tamaño aleatorio
-            let size = Math.random() * 5 + 2; 
-            snowflake.style.width = `${size}px`;
-            snowflake.style.height = `${size}px`;
-            
-            // Posición inicial aleatoria
-            snowflake.style.left = `${Math.random() * 100}vw`;
-            
-            // Duración y retraso aleatorio para la animación
-            let duration = Math.random() * 3 + 4; 
-            let delay = Math.random() * 5;
-            
-            snowflake.style.animationDuration = `${duration}s`;
-            snowflake.style.animationDelay = `${delay}s`;
-            
-            snowContainer.appendChild(snowflake);
+        function typeWriter() {
+            if (i < secretMessage.length) {
+                let char = secretMessage.charAt(i);
+                if(char === '\n') {
+                    document.getElementById("terminal").innerHTML += "<br>";
+                } else {
+                    document.getElementById("terminal").innerHTML += char;
+                }
+                i++;
+                setTimeout(typeWriter, 40); 
+            } else {
+                document.getElementById("terminal").innerHTML += '<span class="typing-cursor"></span>';
+            }
         }
     </script>
 </body>
-</html>
+</html> 
