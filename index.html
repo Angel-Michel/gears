@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -97,31 +97,26 @@
         .card.benjamin::before { left: 20px; background: #00e5ff; box-shadow: 0 0 10px #00e5ff; }
         .card.benjamin::after { right: 20px; background: #ff1744; box-shadow: 0 0 10px #ff1744; }
 
-        /* Contenedor de los personajes SVG */
+        /* Contenedor de las fotos */
         .character-img {
             width: 100%;
             height: 180px;
-            background: radial-gradient(circle, #2a3b52 0%, #111 100%);
+            background: #111;
             border-radius: 8px;
             border: 2px solid #555;
             margin-bottom: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             overflow: hidden;
         }
 
-        /* Animación de flotar para los personajes chibi */
-        .chibi-svg {
-            width: 130px;
-            height: 130px;
-            animation: floatChibi 3s ease-in-out infinite;
+        .character-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
         }
 
-        @keyframes floatChibi {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
-            100% { transform: translateY(0px); }
+        .card:hover .character-img img {
+            transform: scale(1.1); /* Efecto de zoom suave al pasar el mouse */
         }
 
         .card h2 {
@@ -211,39 +206,18 @@
     <h1>Transmisión COG Encriptada</h1>
 
     <div class="cards-container" id="main-ui">
-        <!-- Tarjeta Lizzie con personaje en código (SVG) -->
+        <!-- Tarjeta Lizzie -->
         <div class="card lizzie">
             <div class="character-img">
-                <svg viewBox="0 0 100 100" class="chibi-svg">
-                    <!-- Cuerpo -->
-                    <rect x="35" y="70" width="30" height="30" rx="5" fill="#3a404a" />
-                    <rect x="40" y="75" width="20" height="15" rx="3" fill="#1b1d22" stroke="#00e5ff" stroke-width="1"/>
-                    <!-- Cabeza Casco -->
-                    <circle cx="50" cy="45" r="32" fill="#4a4e59" stroke="#2a2d34" stroke-width="3"/>
-                    <!-- Filtros del casco -->
-                    <circle cx="35" cy="60" r="6" fill="#111" />
-                    <circle cx="65" cy="60" r="6" fill="#111" />
-                    <!-- Visor brillante Lizzie -->
-                    <path d="M 25 45 Q 50 55 75 45 Q 50 40 25 45" fill="#00e5ff" filter="drop-shadow(0 0 6px #00e5ff)"/>
-                </svg>
+                <img src="lizzi.jfif" alt="Lizzie Carmine">
             </div>
             <h2>Lizzie Carmine</h2>
         </div>
 
-        <!-- Tarjeta Benjamin con personaje en código (SVG) -->
+        <!-- Tarjeta Benjamin -->
         <div class="card benjamin">
             <div class="character-img">
-                <svg viewBox="0 0 100 100" class="chibi-svg">
-                    <!-- Cuerpo -->
-                    <rect x="35" y="70" width="30" height="30" rx="5" fill="#3a404a" />
-                    <rect x="40" y="75" width="20" height="15" rx="3" fill="#1b1d22" stroke="#ff1744" stroke-width="1"/>
-                    <!-- Cabeza Casco (Forma de Ben) -->
-                    <path d="M 18 45 C 18 15, 82 15, 82 45 C 82 75, 65 78, 50 78 C 35 78, 18 75, 18 45" fill="#3a404a" stroke="#1b1d22" stroke-width="3"/>
-                    <!-- Visor horizontal brillante Ben -->
-                    <rect x="30" y="38" width="40" height="8" rx="2" fill="#00e5ff" filter="drop-shadow(0 0 6px #00e5ff)"/>
-                    <!-- Ranura vertical del visor de Ben -->
-                    <rect x="46" y="46" width="8" height="15" rx="2" fill="#00e5ff" filter="drop-shadow(0 0 6px #00e5ff)"/>
-                </svg>
+                <img src="ben.jfif" alt="Benjamin Carmine">
             </div>
             <h2>Benjamin Carmine</h2>
         </div>
@@ -256,7 +230,6 @@
     </div>
 
     <script>
-        // La carta de cumpleaños que se escribirá automáticamente
         const secretMessage = "Iniciando desencriptación...\nConexión segura establecida.\n\n¡FELIZ CUMPLEAÑOS, PAFE! 🎉\n\nLizzie y Benjamin han asegurado el perímetro en la pista de hielo exclusivamente para celebrar tu día.\n\nEres una verdadera leyenda en nuestra escuadra. Que este nuevo nivel en tu vida esté lleno de victorias, recompensas épicas y cero Locust a la vista.\n\n¡Disfruta tu día al máximo, soldado! Sigue brillando.\n\nFin de la transmisión.";
         
         let i = 0;
