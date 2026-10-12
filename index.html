@@ -71,7 +71,7 @@
             border: 2px solid #4a4e59;
             border-radius: 15px;
             padding: 15px;
-            width: 200px;
+            width: 220px;
             text-align: center;
             box-shadow: 0 10px 20px rgba(0,0,0,0.6), inset 0 0 15px rgba(0,0,0,0.8);
             position: relative;
@@ -97,15 +97,31 @@
         .card.benjamin::before { left: 20px; background: #00e5ff; box-shadow: 0 0 10px #00e5ff; }
         .card.benjamin::after { right: 20px; background: #ff1744; box-shadow: 0 0 10px #ff1744; }
 
-        /* Imágenes de los personajes */
+        /* Contenedor de los personajes SVG */
         .character-img {
             width: 100%;
             height: 180px;
-            background-color: #111;
+            background: radial-gradient(circle, #2a3b52 0%, #111 100%);
             border-radius: 8px;
             border: 2px solid #555;
             margin-bottom: 15px;
-            object-fit: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Animación de flotar para los personajes chibi */
+        .chibi-svg {
+            width: 130px;
+            height: 130px;
+            animation: floatChibi 3s ease-in-out infinite;
+        }
+
+        @keyframes floatChibi {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
         }
 
         .card h2 {
@@ -131,8 +147,6 @@
             letter-spacing: 2px;
             box-shadow: 0 5px 15px rgba(211, 47, 47, 0.5);
             transition: all 0.2s ease;
-            position: relative;
-            overflow: hidden;
         }
 
         .action-btn:hover {
@@ -162,7 +176,7 @@
         .terminal-text {
             color: #00e5ff;
             font-family: 'Courier New', Courier, monospace;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             line-height: 1.6;
             text-shadow: 0 0 5px rgba(0, 229, 255, 0.5);
             text-align: left;
@@ -183,7 +197,7 @@
 
     <div class="snowflakes">
         <script>
-            for(let i=0; i<30; i++){
+            for(let i=0; i<40; i++){
                 let snow = document.createElement('div');
                 snow.className = 'snowflake';
                 snow.style.left = Math.random() * 100 + 'vw';
@@ -197,13 +211,40 @@
     <h1>Transmisión COG Encriptada</h1>
 
     <div class="cards-container" id="main-ui">
+        <!-- Tarjeta Lizzie con personaje en código (SVG) -->
         <div class="card lizzie">
-            <img src="https://via.placeholder.com/200x180/1a1a1a/00e5ff?text=LIZZIE+MINI" alt="Lizzie Carmine" class="character-img">
+            <div class="character-img">
+                <svg viewBox="0 0 100 100" class="chibi-svg">
+                    <!-- Cuerpo -->
+                    <rect x="35" y="70" width="30" height="30" rx="5" fill="#3a404a" />
+                    <rect x="40" y="75" width="20" height="15" rx="3" fill="#1b1d22" stroke="#00e5ff" stroke-width="1"/>
+                    <!-- Cabeza Casco -->
+                    <circle cx="50" cy="45" r="32" fill="#4a4e59" stroke="#2a2d34" stroke-width="3"/>
+                    <!-- Filtros del casco -->
+                    <circle cx="35" cy="60" r="6" fill="#111" />
+                    <circle cx="65" cy="60" r="6" fill="#111" />
+                    <!-- Visor brillante Lizzie -->
+                    <path d="M 25 45 Q 50 55 75 45 Q 50 40 25 45" fill="#00e5ff" filter="drop-shadow(0 0 6px #00e5ff)"/>
+                </svg>
+            </div>
             <h2>Lizzie Carmine</h2>
         </div>
 
+        <!-- Tarjeta Benjamin con personaje en código (SVG) -->
         <div class="card benjamin">
-            <img src="https://via.placeholder.com/200x180/1a1a1a/00e5ff?text=BEN+MINI" alt="Benjamin Carmine" class="character-img">
+            <div class="character-img">
+                <svg viewBox="0 0 100 100" class="chibi-svg">
+                    <!-- Cuerpo -->
+                    <rect x="35" y="70" width="30" height="30" rx="5" fill="#3a404a" />
+                    <rect x="40" y="75" width="20" height="15" rx="3" fill="#1b1d22" stroke="#ff1744" stroke-width="1"/>
+                    <!-- Cabeza Casco (Forma de Ben) -->
+                    <path d="M 18 45 C 18 15, 82 15, 82 45 C 82 75, 65 78, 50 78 C 35 78, 18 75, 18 45" fill="#3a404a" stroke="#1b1d22" stroke-width="3"/>
+                    <!-- Visor horizontal brillante Ben -->
+                    <rect x="30" y="38" width="40" height="8" rx="2" fill="#00e5ff" filter="drop-shadow(0 0 6px #00e5ff)"/>
+                    <!-- Ranura vertical del visor de Ben -->
+                    <rect x="46" y="46" width="8" height="15" rx="2" fill="#00e5ff" filter="drop-shadow(0 0 6px #00e5ff)"/>
+                </svg>
+            </div>
             <h2>Benjamin Carmine</h2>
         </div>
     </div>
