@@ -27,7 +27,7 @@
         .overlay {
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(11, 29, 58, 0.4);
+            background: rgba(11, 29, 58, 0.45);
             z-index: 0;
             pointer-events: none;
         }
@@ -92,63 +92,80 @@
             flex-wrap: wrap;
             justify-content: center;
             width: 100%;
-            max-width: 900px;
+            max-width: 950px;
             padding: 0 15px;
             box-sizing: border-box;
             margin-top: auto;
             margin-bottom: auto;
         }
 
-        .character-sprite {
-            width: 140px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        /* Tarjetas Metálicas Estilo CGO para encerrar los personajes */
+        .character-card {
+            background: linear-gradient(145deg, #1f232a, #111317);
+            border: 2px solid #4a4e59;
+            border-radius: 12px;
+            padding: 10px;
+            width: 150px;
+            text-align: center;
             cursor: pointer;
-            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.7), inset 0 0 15px rgba(0,0,0,0.9);
             position: relative;
+            transition: all 0.3s ease;
         }
 
-        .character-sprite img {
+        .character-card:hover {
+            transform: translateY(-8px);
+            border-color: #00e5ff;
+            box-shadow: 0 15px 30px rgba(0, 229, 255, 0.3), inset 0 0 20px rgba(0, 229, 255, 0.3);
+        }
+
+        /* Luces superiores de la armadura estilo Gears */
+        .character-card::before, .character-card::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 4px;
+            border-radius: 2px;
+            top: -3px;
+        }
+        .character-card::before { left: 15px; background: #00e5ff; box-shadow: 0 0 8px #00e5ff; }
+        .character-card::after { right: 15px; background: #00e5ff; box-shadow: 0 0 8px #00e5ff; }
+
+        .character-img-container {
             width: 100%;
-            height: auto;
-            filter: drop-shadow(0px 10px 10px rgba(0,0,0,0.8));
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            animation: float 4s ease-in-out infinite;
+            height: 160px;
+            background: #090b0e;
+            border-radius: 8px;
+            border: 1px solid #333;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
         }
 
-        .char-1 img { animation-delay: 0s; }
-        .char-2 img { animation-delay: 1s; }
-        .char-3 img { animation-delay: 0.5s; }
-        .char-4 img { animation-delay: 1.5s; }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+        .character-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ajusta la foto perfectamente dentro del cuadro sin deformarse */
+            transition: transform 0.3s ease;
         }
 
-        .character-sprite:hover img {
-            transform: scale(1.15) translateY(-10px);
-            filter: drop-shadow(0px 0px 20px rgba(0, 229, 255, 0.8)) drop-shadow(0px 15px 15px rgba(0,0,0,0.6));
-            animation-play-state: paused;
+        .character-card:hover img {
+            transform: scale(1.08);
         }
 
         .character-name {
             font-family: 'Share Tech Mono', monospace;
-            font-size: 1.1rem;
-            color: white;
-            text-shadow: 0px 0px 8px #00e5ff, 2px 2px 4px black;
-            margin-top: 8px;
-            opacity: 0.9;
-            transition: opacity 0.3s, transform 0.3s;
+            font-size: 1rem;
+            color: #e0e0e0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 2px black;
+            margin: 0;
         }
 
-        .character-sprite:hover .character-name {
-            opacity: 1;
-            transform: scale(1.1);
-            color: #e0f7fa;
-        }
-
+        /* Panel Holográfico */
         #message-panel {
             display: none;
             z-index: 10;
@@ -225,8 +242,9 @@
             h1 { font-size: 1.5rem; }
             .instruction-text { font-size: 0.85rem; }
             .characters-grid { gap: 10px; }
-            .character-sprite { width: 42%; }
-            .character-name { font-size: 0.95rem; }
+            .character-card { width: 42%; padding: 8px; }
+            .character-img-container { height: 130px; }
+            .character-name { font-size: 0.9rem; }
             #message-panel { padding: 15px; width: 90%; }
             .terminal-text { font-size: 1rem; min-height: 230px;}
         }
@@ -256,24 +274,32 @@
 
     <div class="characters-grid" id="main-ui">
         
-        <div class="character-sprite char-1" onclick="openTransmission('anthony')">
-            <img src="anto.jfif" alt="Anthony">
-            <div class="character-name">ANTHONY</div>
+        <div class="character-card" onclick="openTransmission('anthony')">
+            <div class="character-img-container">
+                <img src="anto.jfif" alt="Anthony">
+            </div>
+            <p class="character-name">ANTHONY</p>
         </div>
 
-        <div class="character-sprite char-2" onclick="openTransmission('benjamin')">
-            <img src="ben.jfif" alt="Benjamin">
-            <div class="character-name">BENJAMIN</div>
+        <div class="character-card" onclick="openTransmission('benjamin')">
+            <div class="character-img-container">
+                <img src="ben.jfif" alt="Benjamin">
+            </div>
+            <p class="character-name">BENJAMIN</p>
         </div>
 
-        <div class="character-sprite char-3" onclick="openTransmission('clayton')">
-            <img src="clay.jfif" alt="Clayton">
-            <div class="character-name">CLAYTON</div>
+        <div class="character-card" onclick="openTransmission('clayton')">
+            <div class="character-img-container">
+                <img src="clay.jfif" alt="Clayton">
+            </div>
+            <p class="character-name">CLAYTON</p>
         </div>
 
-        <div class="character-sprite char-4" onclick="openTransmission('lizzie')">
-            <img src="lizzi.jfif" alt="Lizzie">
-            <div class="character-name">LIZZIE</div>
+        <div class="character-card" onclick="openTransmission('lizzie')">
+            <div class="character-img-container">
+                <img src="lizzi.jfif" alt="Lizzie">
+            </div>
+            <p class="character-name">LIZZIE</p>
         </div>
 
     </div>
