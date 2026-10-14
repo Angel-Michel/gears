@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -99,13 +99,13 @@
             margin-bottom: auto;
         }
 
-        /* Tarjetas Metálicas Estilo CGO para encerrar los personajes */
+        /* Tarjetas Metálicas Estilo CGO Uniformes */
         .character-card {
             background: linear-gradient(145deg, #1f232a, #111317);
             border: 2px solid #4a4e59;
             border-radius: 12px;
             padding: 10px;
-            width: 150px;
+            width: 160px;
             text-align: center;
             cursor: pointer;
             box-shadow: 0 10px 25px rgba(0,0,0,0.7), inset 0 0 15px rgba(0,0,0,0.9);
@@ -119,7 +119,6 @@
             box-shadow: 0 15px 30px rgba(0, 229, 255, 0.3), inset 0 0 20px rgba(0, 229, 255, 0.3);
         }
 
-        /* Luces superiores de la armadura estilo Gears */
         .character-card::before, .character-card::after {
             content: '';
             position: absolute;
@@ -133,7 +132,7 @@
 
         .character-img-container {
             width: 100%;
-            height: 160px;
+            height: 180px;
             background: #090b0e;
             border-radius: 8px;
             border: 1px solid #333;
@@ -147,7 +146,8 @@
         .character-card img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Ajusta la foto perfectamente dentro del cuadro sin deformarse */
+            /* 'contain' ajusta la imagen completa dentro del cuadro sin cortarla ni deformarla */
+            object-fit: contain; 
             transition: transform 0.3s ease;
         }
 
@@ -243,7 +243,7 @@
             .instruction-text { font-size: 0.85rem; }
             .characters-grid { gap: 10px; }
             .character-card { width: 42%; padding: 8px; }
-            .character-img-container { height: 130px; }
+            .character-img-container { height: 140px; }
             .character-name { font-size: 0.9rem; }
             #message-panel { padding: 15px; width: 90%; }
             .terminal-text { font-size: 1rem; min-height: 230px;}
