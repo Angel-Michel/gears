@@ -10,8 +10,7 @@
             margin: 0;
             padding: 0;
             min-height: 100vh;
-            /* Aquí cargamos la nueva imagen de fondo */
-            background-image: url('fondo.jpg');
+            background-image: url('fondo.jfif');
             background-size: cover;
             background-position: center bottom;
             background-attachment: fixed;
@@ -25,7 +24,6 @@
             position: relative;
         }
 
-        /* Capa oscura semitransparente para que el texto resalte sobre el fondo */
         .overlay {
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -87,7 +85,6 @@
             50% { opacity: 0.6; }
         }
 
-        /* Contenedor libre sin tarjetas */
         .characters-grid {
             display: flex;
             gap: 20px;
@@ -102,7 +99,6 @@
             margin-bottom: auto;
         }
 
-        /* Estilo para los personajes libres */
         .character-sprite {
             width: 160px;
             display: flex;
@@ -116,14 +112,11 @@
         .character-sprite img {
             width: 100%;
             height: auto;
-            /* Le damos un sombreado para que resalte sobre la base militar */
             filter: drop-shadow(0px 10px 10px rgba(0,0,0,0.8));
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            /* Animación de "flote" muy suave */
             animation: float 4s ease-in-out infinite;
         }
 
-        /* Desfasar la animación para que no floten todos igual */
         .char-1 img { animation-delay: 0s; }
         .char-2 img { animation-delay: 1s; }
         .char-3 img { animation-delay: 0.5s; }
@@ -134,7 +127,6 @@
             50% { transform: translateY(-8px); }
         }
 
-        /* Efecto al pasar el mouse o tocar */
         .character-sprite:hover img {
             transform: scale(1.15) translateY(-10px);
             filter: drop-shadow(0px 0px 20px rgba(0, 229, 255, 0.8)) drop-shadow(0px 15px 15px rgba(0,0,0,0.6));
@@ -157,7 +149,6 @@
             color: #e0f7fa;
         }
 
-        /* Panel Holográfico (Sin cambios) */
         #message-panel {
             display: none;
             z-index: 10;
@@ -234,7 +225,6 @@
             h1 { font-size: 1.6rem; }
             .instruction-text { font-size: 0.9rem; }
             .characters-grid { gap: 10px; }
-            /* Personajes más pequeños en móvil */
             .character-sprite { width: 45%; }
             .character-name { font-size: 1rem; }
             #message-panel { padding: 15px; width: 90%; }
@@ -267,22 +257,22 @@
     <div class="characters-grid" id="main-ui">
         
         <div class="character-sprite char-1" onclick="openTransmission('anthony')">
-            <img src="anthony.png" alt="Anthony">
+            <img src="anthony" alt="Anthony">
             <div class="character-name">ANTHONY</div>
         </div>
 
         <div class="character-sprite char-2" onclick="openTransmission('benjamin')">
-            <img src="benjamin.png" alt="Benjamin">
+            <img src="benjamin" alt="Benjamin">
             <div class="character-name">BENJAMIN</div>
         </div>
 
         <div class="character-sprite char-3" onclick="openTransmission('clayton')">
-            <img src="clayton.png" alt="Clayton">
+            <img src="clayton" alt="Clayton">
             <div class="character-name">CLAYTON</div>
         </div>
 
         <div class="character-sprite char-4" onclick="openTransmission('lizzie')">
-            <img src="lizzie.png" alt="Lizzie">
+            <img src="lizzie" alt="Lizzie">
             <div class="character-name">LIZZIE</div>
         </div>
 
@@ -314,7 +304,6 @@
             charIndex = 0;
             currentMessage = messages[character];
             
-            // Difuminar y oscurecer el fondo y los personajes
             document.getElementById('main-ui').style.filter = "blur(8px) brightness(0.4)";
             document.getElementById('main-ui').style.pointerEvents = "none"; 
             document.getElementById('main-header').style.filter = "blur(5px) brightness(0.5)";
@@ -349,7 +338,6 @@
             
             document.getElementById('message-panel').style.display = "none";
             
-            // Restaurar fondo y personajes
             document.getElementById('main-ui').style.filter = "none";
             document.getElementById('main-ui').style.pointerEvents = "auto";
             document.getElementById('main-header').style.filter = "none";
